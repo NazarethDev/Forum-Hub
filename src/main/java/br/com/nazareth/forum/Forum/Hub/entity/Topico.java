@@ -4,7 +4,6 @@ import br.com.nazareth.forum.Forum.Hub.model.EstadoTopico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
