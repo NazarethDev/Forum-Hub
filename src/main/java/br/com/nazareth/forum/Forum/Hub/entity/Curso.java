@@ -10,7 +10,7 @@ public class Curso {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private Categoria curso;
+    private Categoria categoria;
     private String nome;
 
     public Curso (){}
@@ -23,12 +23,12 @@ public class Curso {
         this.id = id;
     }
 
-    public Categoria getCurso() {
-        return curso;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setCurso(Categoria curso) {
-        this.curso = curso;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getNome() {

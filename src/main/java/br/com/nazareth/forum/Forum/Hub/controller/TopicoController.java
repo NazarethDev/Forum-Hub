@@ -1,10 +1,8 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
-import br.com.nazareth.forum.Forum.Hub.entity.Topico;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
-import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
-import br.com.nazareth.forum.Forum.Hub.service.TopicService;
+import br.com.nazareth.forum.Forum.Hub.infra.service.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +27,6 @@ public class TopicoController {
     public ResponseEntity newTopic(@RequestBody @Valid DadosNewTopic newTopic, UriComponentsBuilder uriBuilder){
         var topic = topicService.createNewTopic(newTopic);
         topicRepository.save(topic);
-
         var uri = uriBuilder.path("/topico/{id}").buildAndExpand(topic.getId()).toUri();
         return ResponseEntity.created(uri).body("Tópico criado com sucesso!");
     }
