@@ -20,4 +20,6 @@ public class Usuario {
     private List<Resposta> respostas;
     @OneToMany(mappedBy = "autor")
     private List<Topico> topicos;
+
+    public Usuario(){}
 }
