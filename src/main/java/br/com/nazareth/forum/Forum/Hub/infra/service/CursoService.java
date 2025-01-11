@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CursoService {
 
@@ -26,5 +28,11 @@ public class CursoService {
         curso.setNome(dadosCurso.nome());
         curso.setCategoria(dadosCurso.categoria());
         return cursoRepository.save(curso);
+    }
+
+    public List<DadosCurso> showAllCourses() {
+        return cursoRepository.findAll().stream()
+                .map(DadosCurso::fromEntity) // Converte cada Curso para DadosCurso
+                .toList();
     }
 }

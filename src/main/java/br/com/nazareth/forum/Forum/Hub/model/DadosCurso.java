@@ -1,5 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.model;
 
+import br.com.nazareth.forum.Forum.Hub.entity.Curso;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,4 +10,7 @@ public record DadosCurso(
         @NotNull
         Categoria categoria
 ) {
+        public static DadosCurso fromEntity(Curso curso) {
+                return new DadosCurso(curso.getNome(), curso.getCategoria());
+        }
 }

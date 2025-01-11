@@ -5,11 +5,10 @@ import br.com.nazareth.forum.Forum.Hub.model.DadosCurso;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cursos")
@@ -29,4 +28,13 @@ public class CursoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<List<DadosCurso>> showRegisterCourses() {
+        List<DadosCurso> cursos = cursoService.showAllCourses();
+        return ResponseEntity.ok(cursos); // Retorna a lista de DadosCurso
+    }
+
+
+
 }
