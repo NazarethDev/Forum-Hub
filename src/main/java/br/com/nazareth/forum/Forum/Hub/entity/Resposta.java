@@ -16,6 +16,7 @@ public class Resposta {
     private Long id;
     private String mensagem;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataAtualizacao;
     @ManyToOne
     @JoinColumn(name = "topico_id", nullable = false)
     private Topico topico;

@@ -1,5 +1,7 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
+import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
+import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,8 @@ public class Topico {
 
     private LocalDateTime dataCriacao;
 
+    private LocalDateTime dataAtualicacao;
+
     @OneToMany (mappedBy = "topico", cascade = CascadeType.ALL)
     private List<Resposta> respostas;
 
@@ -44,10 +48,19 @@ public class Topico {
         this.mensagem = novoTopico.mensagem();
         this. autor = novoTopico.autor();
         this.dataCriacao = LocalDateTime.now();
+        this.dataAtualicacao = null;
         this.curso = curso;
         this.answered = false;
     }
 
+    public void atualizar(DadosAtualizacao dados) {
+        this.titulo = dados.titulo();
+        this.mensagem = dados.mensagem();
+        this.answered = dados.answered();
+        this.curso = dados.curso();
+        this.autor = dados.autor();
+        this.dataAtualicacao = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
@@ -112,4 +125,13 @@ public class Topico {
     public void setAutor(Usuario autor) {
         this.autor = autor;
     }
+
+    public LocalDateTime getDataAtualicacao() {
+        return dataAtualicacao;
+    }
+
+    public void setDataAtualicacao(LocalDateTime dataAtualicacao) {
+        this.dataAtualicacao = dataAtualicacao;
+    }
+
 }

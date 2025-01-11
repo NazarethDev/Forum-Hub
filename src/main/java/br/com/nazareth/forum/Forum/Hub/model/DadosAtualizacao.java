@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record DadosListagemTopicos(
+public record DadosAtualizacao (
         @NotBlank
         String titulo,
         @NotBlank
@@ -16,14 +16,15 @@ public record DadosListagemTopicos(
         @NotNull
         Long id,
         @NotNull
-        LocalDateTime dataCriacao,
+        LocalDateTime dataAtualizacao,
         boolean answered,
         @NotNull
         Curso curso,
         @NotNull
         Usuario autor
 ) {
-    public DadosListagemTopicos(Topico topico){
-        this(topico.getTitulo(), topico.getMensagem(), topico.getId(), topico.getDataCriacao(), topico.isAnswered(), topico.getCurso(),topico.getAutor());
+    public DadosAtualizacao(Topico topico){
+        this(topico.getTitulo(), topico.getMensagem(), topico.getId(), topico.getDataAtualicacao(), topico.isAnswered(), topico.getCurso(),topico.getAutor());
     }
+
 }

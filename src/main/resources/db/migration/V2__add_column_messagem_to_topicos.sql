@@ -1,2 +1,0 @@
-ALTER TABLE Topicos
-ADD COLUMN mensagem TEXT;

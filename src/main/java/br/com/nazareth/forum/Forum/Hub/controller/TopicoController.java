@@ -1,5 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
+import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
 import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
@@ -44,6 +45,19 @@ public class TopicoController {
     public ResponseEntity showTopicDetails(@PathVariable Long id){
         var topic = topicRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosListagemTopicos(topic));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity updateTopic(@PathVariable Long id, @RequestBody @Valid DadosAtualizacao dados) {
+        topicService.updateTopic(id, dados);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTopic(@PathVariable Long id, DadosListagemTopicos dados){
+        topicService.excludeTopic(dados);
+        return ResponseEntity.noContent().build();
     }
 
 }
