@@ -1,4 +1,4 @@
-package br.com.nazareth.forum.Forum.Hub.infra.service;
+package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
 import br.com.nazareth.forum.Forum.Hub.model.DadosCurso;

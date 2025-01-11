@@ -1,6 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
-import br.com.nazareth.forum.Forum.Hub.infra.service.CursoService;
+import br.com.nazareth.forum.Forum.Hub.service.CursoService;
 import br.com.nazareth.forum.Forum.Hub.model.DadosCurso;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

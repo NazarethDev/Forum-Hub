@@ -4,7 +4,7 @@ import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
 import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
-import br.com.nazareth.forum.Forum.Hub.infra.service.TopicService;
+import br.com.nazareth.forum.Forum.Hub.service.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
