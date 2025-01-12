@@ -18,7 +18,7 @@ public class CursoController {
     private CursoService cursoService;
 
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity registerNewCourse(@RequestBody @Valid DadosCurso dadosCurso, UriComponentsBuilder uriBuilder){
         try{
             var newCourse = cursoService.makeNewCourse(dadosCurso);
