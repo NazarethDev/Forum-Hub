@@ -13,10 +13,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.nio.file.AccessDeniedException;
 
 @RestController
 @RequestMapping("topico")
@@ -56,6 +60,16 @@ public class TopicoController {
 //        topicService.updateTopic(id, dados);
 //        return ResponseEntity.noContent().build();
 //    }
+
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity update(@PathVariable Long id, DadosAtualizacao dados) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Usuario autor = (Usuario) authentication.getPrincipal();
+        return topicService.update(dados, autor);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTopic(@PathVariable Long id, DadosListagemTopicos dados){

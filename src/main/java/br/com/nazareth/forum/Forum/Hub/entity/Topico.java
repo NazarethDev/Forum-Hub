@@ -1,7 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
 import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
-import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,20 +45,17 @@ public class Topico {
     public Topico(DadosNewTopic novoTopico, Usuario autor, Curso curso){
         this.titulo = novoTopico.titulo();
         this.mensagem = novoTopico.mensagem();
-        this.autor = autor; // Agora passando o autor corretamente
+        this.autor = autor;
         this.dataCriacao = LocalDateTime.now();
         this.dataAtualicacao = null;
-        this.curso = curso; // Agora passando o curso corretamente
+        this.curso = curso;
         this.answered = false;
     }
 
-
-    public void atualizar(DadosAtualizacao dados) {
+    public void atualizar(DadosAtualizacao dados, Usuario autor, Curso curso) {
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
-        this.answered = dados.answered();
-        this.curso = dados.curso();
-        this.autor = dados.autor();
+        this.curso = curso;
         this.dataAtualicacao = LocalDateTime.now();
     }
 

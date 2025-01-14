@@ -9,8 +9,8 @@ import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
 import br.com.nazareth.forum.Forum.Hub.model.ShowTopicDetails;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
+import java.nio.file.AccessDeniedException;
 
 @Service
 public class TopicService {
@@ -46,14 +46,15 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
         }
     }
 
-    private Curso getCurso(String nomeCurso){
+    private Curso getCurso(String nomeCurso) {
         return cursoRepository.findByNome(nomeCurso)
                 .orElseGet(() -> {
                     Curso cursoVazio = new Curso();
                     cursoVazio.setNome("Nenhum curso selecionado");
-                    return cursoVazio;
+                    return cursoRepository.save(cursoVazio);  // Salva o curso no banco de dados
                 });
     }
+
 
 
 //    //atualizar tópico
@@ -76,6 +77,16 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 //
 //        topicRepository.save(topico);
 //    }
+
+    public ResponseEntity update(DadosAtualizacao dados, Usuario autor) {
+        var topico = topicRepository.findById(dados.id()).orElseThrow(() -> new RuntimeException("Tópico não encontrado"));
+
+        Curso curso = getCurso(dados.curso());
+        topico.atualizar(dados, autor, curso);
+        topicRepository.save(topico);  // Salva o tópico após a atualização
+        return ResponseEntity.ok(topico);
+    }
+
 
     //Excluir tópico
     public void excludeTopic(DadosListagemTopicos dados) {
