@@ -39,4 +39,11 @@ public class CursoService {
                 .toList();
     }
 
+    public ResponseEntity excluirCurso(Long id) {
+        var curso = cursoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Curso com id " + id + " não encontrado."));
+        curso.setDeletado(true); // Marca como deletado em vez de excluir fisicamente
+        cursoRepository.save(curso);
+        return ResponseEntity.ok("Curso excluído com sucesso.");
+    }
 }

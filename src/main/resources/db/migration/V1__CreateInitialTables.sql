@@ -1,8 +1,10 @@
 CREATE TABLE curso (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     categoria VARCHAR(255) NOT NULL,
-    nome VARCHAR(255) NOT NULL
+    nome VARCHAR(255) NOT NULL,
+    deletado BOOLEAN DEFAULT FALSE
 );
+
 
 CREATE TABLE usuarios (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -14,9 +16,9 @@ CREATE TABLE usuarios (
 CREATE TABLE Topicos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
-    mensagem TEXT NOT NULL,
+    mensagem VARCHAR(800) NOT NULL,
     dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    dataAtualicacao TIMESTAMP NULL,  -- Inicialmente NULL, será preenchido na atualização
+    dataAtualicacao TIMESTAMP NULL,
     answered BOOLEAN NOT NULL DEFAULT FALSE,
     curso_id BIGINT NOT NULL,
     usuario_id BIGINT NOT NULL,
@@ -24,12 +26,11 @@ CREATE TABLE Topicos (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
-
 CREATE TABLE respostas (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     mensagem TEXT NOT NULL,
     dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    dataAtualizacao TIMESTAMP NULL,  -- Inicialmente NULL, será preenchido na atualização
+    dataAtualizacao TIMESTAMP NULL,
     topico_id BIGINT NOT NULL,
     usuario_id BIGINT NOT NULL,
     FOREIGN KEY (topico_id) REFERENCES Topicos(id),

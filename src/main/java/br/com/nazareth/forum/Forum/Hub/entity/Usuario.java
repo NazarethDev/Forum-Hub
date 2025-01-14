@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "topicos", "respostas"})  // Ignora listas recursivas
 @Table(name = "usuarios")
 @Entity
 public class Usuario implements UserDetails {

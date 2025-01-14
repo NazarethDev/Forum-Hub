@@ -3,10 +3,7 @@ package br.com.nazareth.forum.Forum.Hub.service;
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
 import br.com.nazareth.forum.Forum.Hub.entity.Topico;
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
-import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
-import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
-import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
-import br.com.nazareth.forum.Forum.Hub.model.ShowTopicDetails;
+import br.com.nazareth.forum.Forum.Hub.model.*;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
 import jakarta.validation.Valid;
@@ -31,10 +28,12 @@ public class TopicService {
 
 //cria um novo tópico
 public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
-        verifyDuplication(newTopic);
-        Curso curso = getCurso(newTopic.curso());
-        return new Topico(newTopic, autor, curso);
-    }
+    verifyDuplication(newTopic);
+    Curso curso = getCurso(newTopic.curso());
+    Topico topic = new Topico(newTopic, autor, curso);
+    return topicRepository.save(topic);
+}
+
 
     private void verifyDuplication(DadosNewTopic newTopic){
         if (topicRepository.existsByTitulo(newTopic.titulo())){
@@ -49,7 +48,7 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
         return cursoRepository.findByNome(nomeCurso)
                 .orElseGet(() -> {
                     Curso cursoVazio = new Curso();
-                    cursoVazio.setNome("Nenhum curso selecionado");
+                    cursoVazio.setNome("Nenhum curso do banco de dados selecionado.");
                     return cursoRepository.save(cursoVazio);  // Salva o curso no banco de dados
                 });
     }
@@ -82,10 +81,21 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 
 
     //listar todos os topicos
-    public Page<DadosListagemTopicos> listarTopicos(Pageable paginacao) {
-        // Acessando os dados com o repositório e mapeando para DadosListagemTopicos
+    public Page<TopicResponse> listarTopicos(Pageable paginacao) {
+        // Consultando os tópicos do banco
         Page<Topico> page = topicRepository.findAll(paginacao);
-        return page.map(DadosListagemTopicos::new);
+
+        // Convertendo os tópicos para o formato desejado (DTO)
+        return page.map(topico -> new TopicResponse(
+                topico.getId(),
+                topico.getTitulo(),
+                topico.getMensagem(),
+                topico.getDataCriacao(),
+                topico.getDataAtualicacao(),
+                topico.isAnswered(),
+                topico.getCurso().getNome(), // Retorna o nome do curso, por exemplo
+                topico.getAutor().getNome()  // Retorna o nome do autor, sem a senha
+        ));
     }
 
     //apresentar topico em especifico

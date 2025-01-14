@@ -12,6 +12,7 @@ public class Curso {
     private Long id;
     private Categoria categoria;
     private String nome;
+    private boolean deletado = false;
 
     public Curso (){}
 
@@ -37,5 +38,13 @@ public class Curso {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean isDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(boolean deletado) {
+        this.deletado = deletado;
     }
 }

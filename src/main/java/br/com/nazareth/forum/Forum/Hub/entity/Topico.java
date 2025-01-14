@@ -2,6 +2,7 @@ package br.com.nazareth.forum.Forum.Hub.entity;
 
 import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Topico {
     private LocalDateTime dataAtualicacao;
 
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Resposta> respostas;
 
     private boolean answered;

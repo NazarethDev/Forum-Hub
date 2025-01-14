@@ -1,16 +1,15 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
-import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
-import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
-import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
-import br.com.nazareth.forum.Forum.Hub.model.DadosTopicoAtualizado;
+import br.com.nazareth.forum.Forum.Hub.model.*;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
 import br.com.nazareth.forum.Forum.Hub.service.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,21 +27,20 @@ public class TopicoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> newTopic(@RequestBody @Valid DadosNewTopic newTopic,
-                                      UriComponentsBuilder uriBuilder,
-                                      @AuthenticationPrincipal Usuario usuarioLogado) {
-        var topic = topicService.createNewTopic(newTopic, usuarioLogado);
-        topicRepository.save(topic);
+    public ResponseEntity newTopic(@RequestBody @Valid DadosNewTopic newTopic,
+                                   UriComponentsBuilder uriBuilder,
+                                   @AuthenticationPrincipal Usuario usuarioLogado) {
+        var topic = topicService.createNewTopic(newTopic, usuarioLogado); // Não precisa mais salvar no controller
         var uri = uriBuilder.path("/topico/{id}").buildAndExpand(topic.getId()).toUri();
         return ResponseEntity.created(uri).body("Tópico criado com sucesso!");
     }
 
+
     @GetMapping
-    public ResponseEntity<Page<DadosListagemTopicos>> showTopics(Pageable paginacao) {
-        Page<DadosListagemTopicos> topicos = topicService.listarTopicos(paginacao);
+    public ResponseEntity<Page<TopicResponse>> showTopics(@PageableDefault(size = 3, sort = {"dataCriacao"}, direction = Sort.Direction.ASC)Pageable paginacao) {
+        Page<TopicResponse> topicos = topicService.listarTopicos(paginacao);
         return ResponseEntity.ok(topicos);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity showTopicDetails(@PathVariable Long id){
