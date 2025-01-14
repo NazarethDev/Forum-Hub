@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
+
 public record DadosListagemTopicos(
         @NotBlank
         String titulo,
@@ -23,7 +24,7 @@ public record DadosListagemTopicos(
         @NotNull
         Usuario autor
 ) {
-    public DadosListagemTopicos(Topico topico){
-        this(topico.getTitulo(), topico.getMensagem(), topico.getId(), topico.getDataCriacao(), topico.isAnswered(), topico.getCurso(),topico.getAutor());
+    public DadosListagemTopicos(Topico topico) {
+        this(topico.getTitulo(), topico.getMensagem(), topico.getId(), topico.getDataCriacao(), topico.isAnswered(), topico.getCurso(), topico.getAutor());
     }
 }

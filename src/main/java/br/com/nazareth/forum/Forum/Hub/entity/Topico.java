@@ -26,7 +26,7 @@ public class Topico {
 
     private LocalDateTime dataAtualicacao;
 
-    @OneToMany (mappedBy = "topico", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Resposta> respostas;
 
     private boolean answered;

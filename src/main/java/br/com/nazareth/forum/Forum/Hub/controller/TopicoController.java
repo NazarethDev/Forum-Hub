@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -40,9 +38,11 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemTopicos>> showTopics (Pageable paginacao){
-        return topicService.listarTopicos(paginacao);
+    public ResponseEntity<Page<DadosListagemTopicos>> showTopics(Pageable paginacao) {
+        Page<DadosListagemTopicos> topicos = topicService.listarTopicos(paginacao);
+        return ResponseEntity.ok(topicos);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity showTopicDetails(@PathVariable Long id){
@@ -57,9 +57,8 @@ public class TopicoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteTopic(@PathVariable Long id, DadosListagemTopicos dados){
-        topicService.excludeTopic(dados);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteTopic(@PathVariable Long id) {
+        topicService.excludeTopic(id);
+        return ResponseEntity.ok("Tópico excluído com sucesso!");
     }
-
 }

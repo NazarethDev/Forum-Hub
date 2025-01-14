@@ -73,22 +73,19 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 
 
     //Excluir tópico
-    public void excludeTopic(DadosListagemTopicos dados) {
+    public void excludeTopic(Long id) {
+        Topico topico = topicRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tópico não encontrado com o ID: " + id));
 
-        boolean exists = topicRepository.existsById(dados.id());
-
-        if (!exists) {
-            throw new IllegalArgumentException("Não foi encontrado um tópico com esse ID :(");
-        }
-
-        topicRepository.deleteById(dados.id());
+        topicRepository.delete(topico);
     }
 
+
     //listar todos os topicos
-    public ResponseEntity <Page<DadosListagemTopicos>>listarTopicos (@PageableDefault(size = 10, sort = {"dataCriacao"}, direction = Sort.Direction.ASC)Pageable paginacao){
-        var page = topicRepository.findAll(paginacao)
-                .map(DadosListagemTopicos::new);
-        return ResponseEntity.ok(page);
+    public Page<DadosListagemTopicos> listarTopicos(Pageable paginacao) {
+        // Acessando os dados com o repositório e mapeando para DadosListagemTopicos
+        Page<Topico> page = topicRepository.findAll(paginacao);
+        return page.map(DadosListagemTopicos::new);
     }
 
     //apresentar topico em especifico
