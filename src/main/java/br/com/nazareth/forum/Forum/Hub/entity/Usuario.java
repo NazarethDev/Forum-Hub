@@ -1,5 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "usuarios")
@@ -109,5 +111,10 @@ public class Usuario implements UserDetails {
 
     public void setTopicos(List<Topico> topicos) {
         this.topicos = topicos;
+    }
+
+    @Override
+    public String toString() {
+        return  nome;
     }
 }

@@ -43,15 +43,16 @@ public class Topico {
 
     public Topico (){}
 
-    public Topico(DadosNewTopic novoTopico){
+    public Topico(DadosNewTopic novoTopico, Usuario autor, Curso curso){
         this.titulo = novoTopico.titulo();
         this.mensagem = novoTopico.mensagem();
-        this. autor = novoTopico.autor();
+        this.autor = autor; // Agora passando o autor corretamente
         this.dataCriacao = LocalDateTime.now();
         this.dataAtualicacao = null;
-        this.curso = curso;
+        this.curso = curso; // Agora passando o curso corretamente
         this.answered = false;
     }
+
 
     public void atualizar(DadosAtualizacao dados) {
         this.titulo = dados.titulo();
