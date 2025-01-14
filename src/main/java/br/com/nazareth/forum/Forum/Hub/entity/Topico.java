@@ -52,10 +52,9 @@ public class Topico {
         this.answered = false;
     }
 
-    public void atualizar(DadosAtualizacao dados, Usuario autor, Curso curso) {
+    public void atualizar(DadosAtualizacao dados) {
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
-        this.curso = curso;
         this.dataAtualicacao = LocalDateTime.now();
     }
 

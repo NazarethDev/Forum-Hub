@@ -9,17 +9,17 @@ import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
 import br.com.nazareth.forum.Forum.Hub.model.ShowTopicDetails;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.nio.file.AccessDeniedException;
 
 @Service
 public class TopicService {
@@ -55,38 +55,26 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
                 });
     }
 
+    //atualizar tópico
+    public DadosAtualizacao ajustarDados(Long id, DadosAtualizacao dados) {
+        return new DadosAtualizacao(dados.titulo(), dados.mensagem());
+}
 
+    public void updateTopic(Long id, @Valid DadosAtualizacao dados) {
+        var dadosAjustados = ajustarDados(id, dados);
 
-//    //atualizar tópico
-//    public DadosAtualizacao ajustarDados(Long id, DadosAtualizacao dados) {
-//        return new DadosAtualizacao(dados.titulo(), dados.mensagem(), dados.curso());
-//}
+        var topicoOptional = topicRepository.findById(id);
 
-//    public void updateTopic(Long id, @Valid DadosAtualizacao dados) {
-//        var dadosAjustados = ajustarDados(id, dados);
-//
-//        var topicoOptional = topicRepository.findById(id);
-//
-//        if (topicoOptional.isEmpty()) {
-//            throw new IllegalArgumentException("Tópico com o ID especificado não encontrado.");
-//        }
-//
-//        var topico = topicoOptional.get();
-//
-//        topico.atualizar(dadosAjustados);
-//
-//        topicRepository.save(topico);
-//    }
+        if (topicoOptional.isEmpty()) {
+            throw new IllegalArgumentException("Tópico com o ID especificado não encontrado.");
+        }
 
-    public ResponseEntity update(DadosAtualizacao dados, Usuario autor) {
-        var topico = topicRepository.findById(dados.id()).orElseThrow(() -> new RuntimeException("Tópico não encontrado"));
+        var topico = topicoOptional.get();
 
-        Curso curso = getCurso(dados.curso());
-        topico.atualizar(dados, autor, curso);
-        topicRepository.save(topico);  // Salva o tópico após a atualização
-        return ResponseEntity.ok(topico);
+        topico.atualizar(dadosAjustados);
+
+        topicRepository.save(topico);
     }
-
 
     //Excluir tópico
     public void excludeTopic(DadosListagemTopicos dados) {
