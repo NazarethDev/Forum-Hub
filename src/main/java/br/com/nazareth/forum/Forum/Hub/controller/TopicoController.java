@@ -4,6 +4,7 @@ import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
 import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
 import br.com.nazareth.forum.Forum.Hub.model.DadosListagemTopicos;
 import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
+import br.com.nazareth.forum.Forum.Hub.model.DadosTopicoAtualizado;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
 import br.com.nazareth.forum.Forum.Hub.service.TopicService;
 import jakarta.validation.Valid;
@@ -50,9 +51,9 @@ public class TopicoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid DadosAtualizacao dados) {
-        topicService.updateTopic(id, dados);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<DadosTopicoAtualizado> update(@PathVariable Long id, @RequestBody @Valid DadosAtualizacao dados) {
+        var topicoAtualizado = topicService.updateTopic(id, dados);
+        return ResponseEntity.ok(new DadosTopicoAtualizado(topicoAtualizado));
     }
 
     @DeleteMapping("/{id}")

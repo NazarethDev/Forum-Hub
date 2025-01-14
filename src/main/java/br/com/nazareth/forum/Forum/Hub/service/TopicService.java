@@ -16,8 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,7 +60,7 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 }
 
     @Transactional
-    public void updateTopic(Long id, @Valid DadosAtualizacao dados) {
+    public Topico updateTopic(Long id, @Valid DadosAtualizacao dados) {
         var topico = topicRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Tópico com o ID especificado não encontrado."));
 
@@ -70,6 +68,7 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
                 .orElseThrow(() -> new IllegalArgumentException("Curso com o ID especificado não encontrado."));
 
         topico.atualizar(dados, curso);
+        return topico; // Retorna o tópico atualizado
     }
 
 
