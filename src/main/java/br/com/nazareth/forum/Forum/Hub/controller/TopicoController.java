@@ -48,15 +48,12 @@ public class TopicoController {
         return topicService.mostrarTopico(id);
     }
 
-
-
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid DadosAtualizacao dados) {
         topicService.updateTopic(id, dados);
         return ResponseEntity.noContent().build();
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTopic(@PathVariable Long id, DadosListagemTopicos dados){

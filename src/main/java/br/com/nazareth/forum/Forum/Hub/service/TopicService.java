@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
@@ -57,24 +58,20 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 
     //atualizar tópico
     public DadosAtualizacao ajustarDados(Long id, DadosAtualizacao dados) {
-        return new DadosAtualizacao(dados.titulo(), dados.mensagem());
+        return new DadosAtualizacao(dados.titulo(), dados.mensagem(), dados.cursoId());
 }
 
+    @Transactional
     public void updateTopic(Long id, @Valid DadosAtualizacao dados) {
-        var dadosAjustados = ajustarDados(id, dados);
+        var topico = topicRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tópico com o ID especificado não encontrado."));
 
-        var topicoOptional = topicRepository.findById(id);
+        var curso = cursoRepository.findById(dados.cursoId())
+                .orElseThrow(() -> new IllegalArgumentException("Curso com o ID especificado não encontrado."));
 
-        if (topicoOptional.isEmpty()) {
-            throw new IllegalArgumentException("Tópico com o ID especificado não encontrado.");
-        }
-
-        var topico = topicoOptional.get();
-
-        topico.atualizar(dadosAjustados);
-
-        topicRepository.save(topico);
+        topico.atualizar(dados, curso);
     }
+
 
     //Excluir tópico
     public void excludeTopic(DadosListagemTopicos dados) {

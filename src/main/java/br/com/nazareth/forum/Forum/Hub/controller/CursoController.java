@@ -1,5 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
+import br.com.nazareth.forum.Forum.Hub.model.DadosCursosEmDB;
 import br.com.nazareth.forum.Forum.Hub.service.CursoService;
 import br.com.nazareth.forum.Forum.Hub.model.DadosCurso;
 import jakarta.validation.Valid;
@@ -17,7 +18,6 @@ public class CursoController {
     @Autowired
     private CursoService cursoService;
 
-
     @PostMapping("/cadastrar")
     public ResponseEntity registerNewCourse(@RequestBody @Valid DadosCurso dadosCurso, UriComponentsBuilder uriBuilder){
         try{
@@ -30,11 +30,9 @@ public class CursoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DadosCurso>> showRegisterCourses() {
-        List<DadosCurso> cursos = cursoService.showAllCourses();
-        return ResponseEntity.ok(cursos); // Retorna a lista de DadosCurso
+    public ResponseEntity<List<DadosCursosEmDB>> showRegisterCourses() {
+        List<DadosCursosEmDB> cursos = cursoService.showAllCourses();
+        return ResponseEntity.ok(cursos);
     }
-
-
 
 }

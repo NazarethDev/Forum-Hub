@@ -7,6 +7,8 @@ public record DadosAtualizacao(
         @NotBlank
         String titulo,
         @NotNull
-        String mensagem
+        String mensagem,
+        @NotNull
+        Long cursoId
 ) {
 }

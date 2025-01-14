@@ -2,8 +2,10 @@ package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
 import br.com.nazareth.forum.Forum.Hub.model.DadosCurso;
+import br.com.nazareth.forum.Forum.Hub.model.DadosCursosEmDB;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,9 +32,11 @@ public class CursoService {
         return cursoRepository.save(curso);
     }
 
-    public List<DadosCurso> showAllCourses() {
-        return cursoRepository.findAll().stream()
-                .map(DadosCurso::fromEntity) // Converte cada Curso para DadosCurso
+    public List<DadosCursosEmDB> showAllCourses() {
+        List<Curso> cursos = cursoRepository.findAll(); // Obtém as entidades do banco de dados
+        return cursos.stream()
+                .map(DadosCursosEmDB::fromEntity) // Converte para o DTO
                 .toList();
     }
+
 }
