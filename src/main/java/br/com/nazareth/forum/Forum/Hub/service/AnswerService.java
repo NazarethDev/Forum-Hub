@@ -44,6 +44,9 @@ public class AnswerService {
     }
 
     public Page<RespostasListagem> listarRespostasPorTopico(Long topicoId, Pageable paginacao) {
+        if (!answerRepository.existsById(topicoId)){
+            throw new EntityNotFoundException("Tópico não encontrado");
+        }
         Page<Resposta> respostas = answerRepository.findByTopicoId(topicoId, paginacao);
         return respostas.map(resposta -> new RespostasListagem(
                 resposta.getId(),
