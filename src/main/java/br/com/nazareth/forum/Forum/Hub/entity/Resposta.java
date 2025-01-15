@@ -1,5 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
+import br.com.nazareth.forum.Forum.Hub.model.answers.AnswerUpdate;
 import br.com.nazareth.forum.Forum.Hub.model.answers.NewAnswerDates;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -34,6 +35,11 @@ public class Resposta {
         this.autor = autor;
         this.dataCriacao = LocalDateTime.now();
         this.topico = topico;
+    }
+
+    public void update(AnswerUpdate dados) {
+        this.mensagem = dados.mensagem();
+        this.dataAtualizacao = LocalDateTime.now();
     }
 
     public Resposta(){}
@@ -85,4 +91,5 @@ public class Resposta {
     public void setAutor(Usuario autor) {
         this.autor = autor;
     }
+
 }

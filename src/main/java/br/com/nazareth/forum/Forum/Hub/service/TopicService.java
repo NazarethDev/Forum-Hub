@@ -54,11 +54,6 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
                 });
     }
 
-    //atualizar tópico
-    public DadosAtualizacao ajustarDados(Long id, DadosAtualizacao dados) {
-        return new DadosAtualizacao(dados.titulo(), dados.mensagem(), dados.cursoId());
-}
-
     @Transactional
     public Topico updateTopic(Long id, @Valid DadosAtualizacao dados) {
         var topico = topicRepository.findById(id)

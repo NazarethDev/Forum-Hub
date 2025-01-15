@@ -1,6 +1,7 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
+import br.com.nazareth.forum.Forum.Hub.model.answers.AnswerUpdate;
 import br.com.nazareth.forum.Forum.Hub.model.answers.NewAnswerDates;
 import br.com.nazareth.forum.Forum.Hub.model.answers.RespostasListagem;
 import br.com.nazareth.forum.Forum.Hub.service.AnswerService;
@@ -31,6 +32,11 @@ public class RespostaController {
             @PageableDefault(size = 3) Pageable paginacao) {
         Page<RespostasListagem> respostas = answerService.listarRespostasPorTopico(topicoId, paginacao);
         return ResponseEntity.ok(respostas);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateAnswer(@PathVariable Long id, @RequestBody @Valid AnswerUpdate dados){
+        return answerService.atualizar(id, dados);
     }
 
 }

@@ -2,9 +2,7 @@ package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Resposta;
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
-import br.com.nazareth.forum.Forum.Hub.model.answers.NewAnswerDates;
-import br.com.nazareth.forum.Forum.Hub.model.answers.RespostaGerada;
-import br.com.nazareth.forum.Forum.Hub.model.answers.RespostasListagem;
+import br.com.nazareth.forum.Forum.Hub.model.answers.*;
 import br.com.nazareth.forum.Forum.Hub.repository.AnswerRepository;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -49,4 +47,11 @@ public class AnswerService {
         Page<Resposta> respostas = answerRepository.findByTopicoId(topicoId, paginacao);
         return respostas.map(resposta -> new RespostasListagem(resposta.getId(), resposta.getMensagem(), resposta.getDataCriacao()));
     }
+
+    public ResponseEntity atualizar(Long id, AnswerUpdate dados){
+        var resposta = answerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Resposta com o ID especificado não encontrado."));
+        resposta.update(dados);
+        return ResponseEntity.ok(new DadosRespostaAtualizada(resposta));
+    }
+
 }
