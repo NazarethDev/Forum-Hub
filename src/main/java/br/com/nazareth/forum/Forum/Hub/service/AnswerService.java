@@ -35,6 +35,12 @@ public class AnswerService {
         }
         var resposta = new Resposta(dados, autor, topico);
         topico.getRespostas().add(resposta);
+
+        if (!topico.isAnswered()){
+            topico.setAnswered(true);
+            topicRepository.save(topico);
+        }
+
         answerRepository.save(resposta);
         return ResponseEntity.ok(new RespostaGerada(resposta));
     }
