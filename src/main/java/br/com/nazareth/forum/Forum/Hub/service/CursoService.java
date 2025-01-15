@@ -1,11 +1,9 @@
 package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
-import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCurso;
-import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursoAtualizado;
-import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursosEmDB;
-import br.com.nazareth.forum.Forum.Hub.model.cursos.UpdateCourse;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.*;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +34,9 @@ public class CursoService {
     }
 
     public List<DadosCursosEmDB> showAllCourses() {
-        List<Curso> cursos = cursoRepository.findAll(); // Obtém as entidades do banco de dados
+        List<Curso> cursos = cursoRepository.findAll();
         return cursos.stream()
-                .map(DadosCursosEmDB::fromEntity) // Converte para o DTO
+                .map(DadosCursosEmDB::fromEntity)
                 .toList();
     }
 
@@ -57,5 +55,22 @@ public class CursoService {
         curso.atualizar(dados);
     cursoRepository.save(curso);
     return ResponseEntity.ok(new DadosCursoAtualizado(curso));
+    }
+
+    public void setAsDeleted(Long id) {
+        var curso = cursoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Curso com id " + id + " não encontrado."));
+        if (curso.isDeletado()) {
+            throw new IllegalStateException("O curso já foi marcado como deletado.");
+        }
+        curso.setDeletado(true);
+        cursoRepository.save(curso);
+    }
+
+    public List<ActiveCoursesList> showActiveCourses() {
+        List<Curso> cursos = cursoRepository.findAllAtivos();
+        return cursos.stream()
+                .map(ActiveCoursesList::fromEntity)
+                .toList();
     }
 }

@@ -1,5 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
+import br.com.nazareth.forum.Forum.Hub.model.cursos.ActiveCoursesList;
 import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursosEmDB;
 import br.com.nazareth.forum.Forum.Hub.model.cursos.UpdateCourse;
 import br.com.nazareth.forum.Forum.Hub.service.CursoService;
@@ -30,9 +31,15 @@ public class CursoController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<DadosCursosEmDB>> showRegisterCourses() {
         List<DadosCursosEmDB> cursos = cursoService.showAllCourses();
+        return ResponseEntity.ok(cursos);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ActiveCoursesList>> showActiveCourses() {
+        List<ActiveCoursesList> cursos = cursoService.showActiveCourses();
         return ResponseEntity.ok(cursos);
     }
 
@@ -45,5 +52,13 @@ public class CursoController {
     public ResponseEntity updateCourse(@PathVariable Long id, @RequestBody @Valid UpdateCourse dados){
         return cursoService.atualizarCurso(id,dados);
     }
+
+    @DeleteMapping("/logical/{id}")
+    public ResponseEntity<Void> logicalDeleteCourse(@PathVariable Long id) {
+        cursoService.setAsDeleted(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 }
