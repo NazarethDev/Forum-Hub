@@ -1,6 +1,7 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
 import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursosEmDB;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.UpdateCourse;
 import br.com.nazareth.forum.Forum.Hub.service.CursoService;
 import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCurso;
 import jakarta.validation.Valid;
@@ -38,6 +39,11 @@ public class CursoController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteCourse(@PathVariable Long id){
         return cursoService.excluirCurso(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateCourse(@PathVariable Long id, @RequestBody @Valid UpdateCourse dados){
+        return cursoService.atualizarCurso(id,dados);
     }
 
 }

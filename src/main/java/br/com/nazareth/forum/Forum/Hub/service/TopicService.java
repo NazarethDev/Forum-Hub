@@ -69,9 +69,8 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 
     //Excluir tópico
     public void excludeTopic(Long id) {
-        Topico topico = topicRepository.findById(id)
+        var topico = topicRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Tópico não encontrado com o ID: " + id));
-
         topicRepository.delete(topico);
     }
 

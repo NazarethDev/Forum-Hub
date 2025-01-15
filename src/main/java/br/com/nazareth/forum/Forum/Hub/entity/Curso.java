@@ -1,7 +1,9 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
 import br.com.nazareth.forum.Forum.Hub.model.cursos.Categoria;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.UpdateCourse;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 
 
 @Table(name = "curso")
@@ -15,6 +17,16 @@ public class Curso {
     private boolean deletado = false;
 
     public Curso (){}
+
+    public void atualizar(@Valid UpdateCourse dados) {
+        if (dados.nome() != null && !dados.nome().isBlank()) {
+            this.nome = dados.nome();
+        }
+        if (dados.categoria() != null) {
+            this.categoria = dados.categoria();
+        }
+    }
+
 
     public Long getId() {
         return id;
@@ -47,4 +59,5 @@ public class Curso {
     public void setDeletado(boolean deletado) {
         this.deletado = deletado;
     }
+
 }

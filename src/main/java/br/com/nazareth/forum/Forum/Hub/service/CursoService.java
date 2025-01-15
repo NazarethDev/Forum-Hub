@@ -2,8 +2,11 @@ package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
 import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCurso;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursoAtualizado;
 import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursosEmDB;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.UpdateCourse;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -45,5 +48,14 @@ public class CursoService {
         curso.setDeletado(true); // Marca como deletado em vez de excluir fisicamente
         cursoRepository.save(curso);
         return ResponseEntity.ok("Curso excluído com sucesso.");
+    }
+
+    public ResponseEntity atualizarCurso(Long id, @Valid UpdateCourse dados) {
+        var curso = cursoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Curso com id " + id + " não encontrado."));
+
+        curso.atualizar(dados);
+    cursoRepository.save(curso);
+    return ResponseEntity.ok(new DadosCursoAtualizado(curso));
     }
 }
