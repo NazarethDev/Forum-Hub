@@ -1,8 +1,8 @@
 package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
-import br.com.nazareth.forum.Forum.Hub.model.DadosCurso;
-import br.com.nazareth.forum.Forum.Hub.model.DadosCursosEmDB;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCurso;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.DadosCursosEmDB;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

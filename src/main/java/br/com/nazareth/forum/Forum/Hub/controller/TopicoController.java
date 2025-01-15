@@ -1,7 +1,10 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
-import br.com.nazareth.forum.Forum.Hub.model.*;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosAtualizacao;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosNewTopic;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosTopicoAtualizado;
+import br.com.nazareth.forum.Forum.Hub.model.topics.TopicResponse;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
 import br.com.nazareth.forum.Forum.Hub.service.TopicService;
 import jakarta.validation.Valid;

@@ -1,7 +1,7 @@
 package br.com.nazareth.forum.Forum.Hub.controller;
 
-import br.com.nazareth.forum.Forum.Hub.model.DadosAutenticacao;
-import br.com.nazareth.forum.Forum.Hub.model.DadosNovoUsuario;
+import br.com.nazareth.forum.Forum.Hub.model.user.DadosAutenticacao;
+import br.com.nazareth.forum.Forum.Hub.model.user.DadosNovoUsuario;
 import br.com.nazareth.forum.Forum.Hub.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

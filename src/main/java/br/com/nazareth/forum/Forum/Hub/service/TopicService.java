@@ -3,15 +3,16 @@ package br.com.nazareth.forum.Forum.Hub.service;
 import br.com.nazareth.forum.Forum.Hub.entity.Curso;
 import br.com.nazareth.forum.Forum.Hub.entity.Topico;
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
-import br.com.nazareth.forum.Forum.Hub.model.*;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosAtualizacao;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosNewTopic;
+import br.com.nazareth.forum.Forum.Hub.model.topics.ShowTopicDetails;
+import br.com.nazareth.forum.Forum.Hub.model.topics.TopicResponse;
 import br.com.nazareth.forum.Forum.Hub.repository.CursoRepository;
 import br.com.nazareth.forum.Forum.Hub.repository.TopicRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,7 +68,7 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
                 .orElseThrow(() -> new IllegalArgumentException("Curso com o ID especificado não encontrado."));
 
         topico.atualizar(dados, curso);
-        return topico; // Retorna o tópico atualizado
+        return topico;
     }
 
 
@@ -82,7 +83,6 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
 
     //listar todos os topicos
     public Page<TopicResponse> listarTopicos(Pageable paginacao) {
-        // Consultando os tópicos do banco
         Page<Topico> page = topicRepository.findAll(paginacao);
 
         // Convertendo os tópicos para o formato desejado (DTO)

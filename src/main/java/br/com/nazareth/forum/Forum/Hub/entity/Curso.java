@@ -1,6 +1,6 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
-import br.com.nazareth.forum.Forum.Hub.model.Categoria;
+import br.com.nazareth.forum.Forum.Hub.model.cursos.Categoria;
 import jakarta.persistence.*;
 
 

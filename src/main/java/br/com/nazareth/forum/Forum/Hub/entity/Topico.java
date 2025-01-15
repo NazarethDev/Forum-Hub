@@ -1,7 +1,7 @@
 package br.com.nazareth.forum.Forum.Hub.entity;
 
-import br.com.nazareth.forum.Forum.Hub.model.DadosAtualizacao;
-import br.com.nazareth.forum.Forum.Hub.model.DadosNewTopic;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosAtualizacao;
+import br.com.nazareth.forum.Forum.Hub.model.topics.DadosNewTopic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

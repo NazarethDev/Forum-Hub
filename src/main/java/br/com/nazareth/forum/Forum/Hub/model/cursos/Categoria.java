@@ -1,4 +1,4 @@
-package br.com.nazareth.forum.Forum.Hub.model;
+package br.com.nazareth.forum.Forum.Hub.model.cursos;
 
 public enum Categoria {
     BACHARELADO,

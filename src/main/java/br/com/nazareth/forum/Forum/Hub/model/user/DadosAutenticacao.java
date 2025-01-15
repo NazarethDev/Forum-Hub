@@ -1,4 +1,4 @@
-package br.com.nazareth.forum.Forum.Hub.model;
+package br.com.nazareth.forum.Forum.Hub.model.user;
 
 import jakarta.validation.constraints.NotBlank;
 

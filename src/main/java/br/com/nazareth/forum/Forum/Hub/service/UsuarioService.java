@@ -1,9 +1,9 @@
 package br.com.nazareth.forum.Forum.Hub.service;
 
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
-import br.com.nazareth.forum.Forum.Hub.model.DadosAutenticacao;
-import br.com.nazareth.forum.Forum.Hub.model.DadosNovoUsuario;
-import br.com.nazareth.forum.Forum.Hub.model.DadosRespostaNovoUsuario;
+import br.com.nazareth.forum.Forum.Hub.model.user.DadosAutenticacao;
+import br.com.nazareth.forum.Forum.Hub.model.user.DadosNovoUsuario;
+import br.com.nazareth.forum.Forum.Hub.model.user.DadosRespostaNovoUsuario;
 import br.com.nazareth.forum.Forum.Hub.repository.UsuarioRepository;
 import br.com.nazareth.forum.Forum.Hub.security.JWTTokenDates;
 import br.com.nazareth.forum.Forum.Hub.security.TokenService;
