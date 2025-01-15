@@ -40,4 +40,10 @@ public class RespostaController {
         return answerService.atualizar(id, dados);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteAnswer(@PathVariable Long id){
+        answerService.excludeAnswer(id);
+        return ResponseEntity.ok("Resposta excluído com sucesso!");
+    }
+
 }

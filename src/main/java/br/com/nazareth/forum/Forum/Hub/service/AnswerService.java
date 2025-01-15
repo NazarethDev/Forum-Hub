@@ -58,4 +58,9 @@ public class AnswerService {
         return ResponseEntity.ok(new DadosRespostaAtualizada(resposta));
     }
 
+    public void excludeAnswer(Long id) {
+        var resposta = answerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Resposta não encontrado com o ID: " + id));
+        answerRepository.delete(resposta);
+    }
 }
