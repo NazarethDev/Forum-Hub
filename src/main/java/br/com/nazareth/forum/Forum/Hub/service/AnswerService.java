@@ -45,7 +45,11 @@ public class AnswerService {
 
     public Page<RespostasListagem> listarRespostasPorTopico(Long topicoId, Pageable paginacao) {
         Page<Resposta> respostas = answerRepository.findByTopicoId(topicoId, paginacao);
-        return respostas.map(resposta -> new RespostasListagem(resposta.getId(), resposta.getMensagem(), resposta.getDataCriacao()));
+        return respostas.map(resposta -> new RespostasListagem(
+                resposta.getId(),
+                resposta.getMensagem(),
+                resposta.getDataCriacao()
+        ));
     }
 
     public ResponseEntity atualizar(Long id, AnswerUpdate dados){

@@ -34,6 +34,7 @@ public class RespostaController {
         return ResponseEntity.ok(respostas);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity updateAnswer(@PathVariable Long id, @RequestBody @Valid AnswerUpdate dados){
         return answerService.atualizar(id, dados);
