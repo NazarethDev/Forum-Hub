@@ -113,4 +113,10 @@ public class UsuarioService {
     }
 
 
+    public ResponseEntity excludeUser(Long id) {
+        var user = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado com o ID: " + id));
+        usuarioRepository.delete(user);
+        return ResponseEntity.noContent().build();
+    }
 }

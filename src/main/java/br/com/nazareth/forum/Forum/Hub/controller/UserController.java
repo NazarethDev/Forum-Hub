@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/cadastrar")
+    @Transactional
     public ResponseEntity cadastrar (@RequestBody @Valid DadosNovoUsuario dados){
         return usuarioService.createUser(dados);
     }
@@ -46,6 +48,11 @@ public class UserController {
 
         Page<RespostasPorUsuario> respostas = usuarioService.getRespostasByUsuario(usuarioId, pageable);
         return ResponseEntity.ok(respostas);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser (@PathVariable Long id){
+        return usuarioService.excludeUser(id);
     }
 
 }
