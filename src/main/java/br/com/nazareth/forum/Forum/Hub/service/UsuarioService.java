@@ -1,7 +1,9 @@
 package br.com.nazareth.forum.Forum.Hub.service;
 
+import br.com.nazareth.forum.Forum.Hub.entity.Resposta;
 import br.com.nazareth.forum.Forum.Hub.entity.Topico;
 import br.com.nazareth.forum.Forum.Hub.entity.Usuario;
+import br.com.nazareth.forum.Forum.Hub.model.answers.RespostasPorUsuario;
 import br.com.nazareth.forum.Forum.Hub.model.topics.ShowTopicDetails;
 import br.com.nazareth.forum.Forum.Hub.model.user.DadosAutenticacao;
 import br.com.nazareth.forum.Forum.Hub.model.user.DadosNovoUsuario;
@@ -97,23 +99,18 @@ public class UsuarioService {
         }
     }
 
-//    public Page<RespostasListagem> getRespostasByUsuario(Long usuarioId, Pageable pageable) {
-//        Optional<Usuario> usuario = usuarioRepository.findById(usuarioId);
-//        if (usuario.isPresent()) {
-//            Page<Resposta> respostasPage = answerRepository.findRespostasByAutor(usuario.get(), pageable);
-//
-//            Page<RespostasPorUsuario> respostasPorUsuario = respostasPage.map(resposta -> new RespostasPorUsuario(
-//                    resposta.getId(),
-//                    resposta.getMensagem(),
-//                    resposta.getDataCriacao(),
-//                    resposta.getDataAtualizacao(),
-//                    resposta.getTopico().getId()
-//            ));
-//            return respostasPorUsuario;
-//        } else {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
-//        }
-//    }
+    public Page<RespostasPorUsuario> getRespostasByUsuario(Long usuarioId, Pageable pageable) {
+        Optional<Usuario> usuario = usuarioRepository.findById(usuarioId);
+        if (usuario.isPresent()) {
+            Page<Resposta> respostasPage = answerRepository.findRespostasByAutor(usuario.get(), pageable);
+
+            Page<RespostasPorUsuario> respostasDTOPage = respostasPage.map(RespostasPorUsuario::new);
+
+            return respostasDTOPage;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+    }
 
 
 }
