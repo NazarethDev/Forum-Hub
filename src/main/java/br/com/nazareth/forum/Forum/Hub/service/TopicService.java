@@ -49,7 +49,7 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
         return cursoRepository.findByNome(nomeCurso)
                 .orElseGet(() -> {
                     Curso cursoVazio = new Curso();
-                    cursoVazio.setNome("Nenhum curso do banco de dados selecionado.");
+                    cursoVazio.setNome("Nome do cuso informado não consta no sistema.");
                     return cursoRepository.save(cursoVazio);  // Salva o curso no banco de dados
                 });
     }
@@ -75,11 +75,10 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
     }
 
 
-    //listar todos os topicos
+    //listar todos os topico
     public Page<TopicResponse> listarTopicos(Pageable paginacao) {
         Page<Topico> page = topicRepository.findAll(paginacao);
 
-        // Convertendo os tópicos para o formato desejado (DTO)
         return page.map(topico -> new TopicResponse(
                 topico.getId(),
                 topico.getTitulo(),
