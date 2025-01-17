@@ -35,15 +35,15 @@ A requisição para a API é `http://localhost:8080/user/cadastrar`, e deve cont
 
 ### Efetuação de login
 Como citado anteriormente, para que um usuário cadastrado realize login, ele deve informar o nome de usuário e senha. O endereço para se efetuar o login é `http://localhost:8080/user/login` o Json fornecido deve ser semelhante a este:
-```
+```json lines
 {
-	"nome" : "Nazareth",
+	"nome" : "Usuario",
 	"senha" : "123456"
 }
 ```
 
 A requisição devolve ao cliente um json com um token que deve ser usado em determinadas requisições à API, as quais estarão citadas neste documento.
-```
+```json lines
 {
 	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOYXphcmV0aCIsImlzcyI6IkFQSSBGb3J1bV9odWIiLCJleHAiOjE3MzY5OTI3MTB9.PgkJhnTUDgEReCRT6fKDVuAchwhfAX3X0ZcmGbtf7F4"
 }
@@ -57,7 +57,7 @@ Novos tópicos com os atributos citados anteriormente devem possuir a requisiç�
 Com isso, um novo tópico é registrado no sistema, e possuirá todas as funcionalidades relativas a ele na API para serem manipulados de acordo com as demais funcionalidades da aplicação.
 
 Quando um novo tópico usa de um curso que não existe na base de dados para que seja associado, o sistema automaticamente registra o nome do curso no tópico como “Nome do curso não consta no sistema”, e o tópico é assim registrado. Isso pode ser alterado posteriormente de acordo com a necessidade. O Json na requisição deve ser:
-```
+```json lines
 {
 	"titulo":"Insomnia e Postman",
 	"mensagem":"Qual a diferença entre essas duas aplicações?",
@@ -77,7 +77,8 @@ Profissionalizante (PROFISSIONALIZANTE);
 
 A requisição precisa levar o seguinte body:
 
-```{
+```json lines
+{
 	"nome":"Medicina",
 	"categoria":"BACHARELADO"
 }
@@ -87,7 +88,7 @@ O endereço para o cadastramento de cursos no sistema é `http://localhost:8080/
 
 ### Registro de novas respostas a tópicos
 Novas respostas para tópicos são feitos através da requisição `http://localhost:8080/answer`. Para que a respostas seja devidamente cadastrada e associada a um tópico, sua requisição precisa levar em um Json que deve conter o texto da resposta (chamado mensagem) e o Id do tópico que está sendo respondido.
-```
+```json lines
 {
 	"topicId":"4",
 	"mensagem":"Os dois são ótimos! Mas ao usar o Postman para testas aplicações na sua máquina, você precisará fazer o download dele para executar na sua máquina"
@@ -97,7 +98,7 @@ Novas respostas para tópicos são feitos através da requisição `http://local
 ## Atualizações de registros no banco de dados (PUT)
 ### Atualização de tópicos 
 Os tópicos cadastrados no sistema podem ser atualizados a partir da requisição `http://localhost:8080/topico/IDTOPICO`. Ao fazer isso, o tópico além de possuir uma data de criação, terá uma data e hora de atualização. Caso o tópico seja atualizado mais de uma vez, a data apresentada sempre será a mais recente. O Json provido na requisição deve ser:
-```
+```json lines
 {
 	
 	"titulo":"Postman ou Insomnia? ",
@@ -111,7 +112,7 @@ Para que usa resposta seja atualizada, a requisição a ser feita é `http://loc
 
 ### Atualização de cursos
 Os atributos de um curso como o nome e a categoria podem ser atualizados a partir da requisição http://localhost:8080/cursos/IDCURSO`. O corpo da requisição precisa ser:
-```
+```json lines
 {
 			"nome": "Técnico em Desenvolvimento de sistemas",
 			"categoria": "TECNICO"
@@ -121,7 +122,7 @@ Os atributos de um curso como o nome e a categoria podem ser atualizados a parti
 ## Disposição da apresentação de dados da API (GET)
 ### Mostrar todos os tópicos
 É possível visualizar todos os tópicos cadastrado no sistema orientado de acordo com sua data de criação a partir da requisição `http://localhost:8080/topico`. A resposta é devolvida da seguinte maneira:
-```
+```json
 {
 	"content": [
 		{
@@ -185,7 +186,7 @@ Os atributos de um curso como o nome e a categoria podem ser atualizados a parti
 
 ### Abrir tópico específico
 Para se apresentar os dados de apenas um tópico, a requisição é `http://localhost:8080/topico/IDTOPICO`, e a resposta a ela é a seguinte:
-```
+```json lines
 {
 	"id": 4,
 	"titulo": "Insomnia e Postman",
@@ -200,7 +201,7 @@ Para se apresentar os dados de apenas um tópico, a requisição é `http://loca
 
 ### Mostra tópicos por usuário
 A API é capaz de mostrar listas dos tópicos gerados por determinado autor, o qual é descrito pelo Id do usuário de que a requisição deve conter para isso. A requisição deve ser `http://localhost:8080/user/IDUSUARIO/topicos`. O Json fornecido é:
-```
+```json lines
 {
 	"content": [
 		{
@@ -264,7 +265,7 @@ A API é capaz de mostrar listas dos tópicos gerados por determinado autor, o q
 
 ### Mostrar tópico em específico
 Você pode obter o registro de um único tópico informando o Id de um tópico previamente registrado no sistema utilizando a requisição `http://localhost:8080/topico/IDTOPICO`. Isso retornará os registros apenas de determinado tópico.
-```
+```json lines
 {
 	"id": 4,
 	"titulo": "Insomnia e Postman",
@@ -279,7 +280,7 @@ Você pode obter o registro de um único tópico informando o Id de um tópico p
 
 ### Mostrar respostas de um tópico
 As respostas de um determinado tópico podem ser devolvidas a partir da requisição `http://localhost:8080/answer/IDTOPICO`. A resposta é semelhante a essa:
-```
+```json lines
 {
 	"content": [
 		{
@@ -329,7 +330,7 @@ As respostas de um determinado tópico podem ser devolvidas a partir da requisi�
 ### Mostrar respostas por usuário
 Assim como com os tópicos, ela também é capaz de listar as respostas elaboradas por determinados usuários. 
 `http://localhost:8080/user/IDUSUARIO/respostas`. O Json retornado é semelhante a este:
-```
+```json lines
 {
 	"content": [
 		{
@@ -384,7 +385,8 @@ Assim como com os tópicos, ela também é capaz de listar as respostas elaborad
 
 ### Mostrar todos os cursos 
 Quando a requisição `http://localhost:8080/cursos/all` é disparada para a API, ela apresentará todos os cursos registrados no banco de dados, seja o estado dele ativo ou inativo. O retorno deve ser:
-```[
+```json lines
+[
 	{
 		"id": 1,
 		"nome": "Técnico em Desenvolvimento de sistemas",
@@ -426,7 +428,7 @@ Quando a requisição `http://localhost:8080/cursos/all` é disparada para a API
 
 ### Mostrar cursos ativos
 Esta requisição por sua vez, deve retornar apenas os cursos ativos que constam no banco de dados, sendo o endereço e retorno dela `http://localhost:8080/cursos`
-```
+```json lines
 [
 	{
 		"id": 1,
