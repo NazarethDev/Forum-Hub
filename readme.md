@@ -12,13 +12,13 @@ Além disso, cada tópico pode ser respondido por outros usuários. A resposta p
 
 ___
 
-# Funcionalidades
+> # Funcionalidades
 
 Os endereços para as funcionalidades serão simulados se utilizando como exemplo o pré-fixo `http://localhost:8080/` para simular o endereço de um servidor.
 
 Dentre as funcionalidades podemos indicar:
 
-## Novos registros no banco de dados (POST)
+> ## Novos registros no banco de dados (POST)
 
 ### Cadastro de novos usuários
 Para o cadastro de novos usuários no sistema, é necessário que seja informado um nome de usuário, e-mail e uma senha. Será necessário para de efetuar login o nome de usuário e senha do usuário.
@@ -95,7 +95,7 @@ Novas respostas para tópicos são feitos através da requisição `http://local
 }
 ```
 
-## Atualizações de registros no banco de dados (PUT)
+> ## Atualizações de registros no banco de dados (PUT)
 ### Atualização de tópicos 
 Os tópicos cadastrados no sistema podem ser atualizados a partir da requisição `http://localhost:8080/topico/IDTOPICO`. Ao fazer isso, o tópico além de possuir uma data de criação, terá uma data e hora de atualização. Caso o tópico seja atualizado mais de uma vez, a data apresentada sempre será a mais recente. O Json provido na requisição deve ser:
 ```json lines
@@ -119,7 +119,7 @@ Os atributos de um curso como o nome e a categoria podem ser atualizados a parti
 }
 ```
 
-## Disposição da apresentação de dados da API (GET)
+> ## Disposição da apresentação de dados da API (GET)
 ### Mostrar todos os tópicos
 É possível visualizar todos os tópicos cadastrado no sistema orientado de acordo com sua data de criação a partir da requisição `http://localhost:8080/topico`. A resposta é devolvida da seguinte maneira:
 ```json
@@ -458,7 +458,7 @@ Esta requisição por sua vez, deve retornar apenas os cursos ativos que constam
 ]
 ```
 
-## Excluir itens (DELETE)
+> ## Excluir itens (DELETE)
 ### Excluir usuário
 Para excluir um usuário e dados relacionados a ele do sistema, a requisição a se usar é `http://localhost:8080/user/IDUSUARIO`. Ao fazer isso, não será mais possível que o usuário recupere sua conta.
 
@@ -487,7 +487,7 @@ Por configuração do sistema, os tokens gerados no login tem duração padrão 
 - Mostrar tópicos por usuário, `http://localhost:8080/user/IDUSUARIO/topicos`.
 
 
-# Tecnologias usadas
+> # Tecnologias usadas
 
 Esse projeto utiliza as seguintes tecnologias:
 
@@ -526,5 +526,88 @@ Esse projeto utiliza as seguintes tecnologias:
         </tbody>
     </table>
 
+
+
+# Novas implementações
+
+O projeto ainda possui o potencial para novas implementações e rotas para se utilizar!
+Caso tenha o interesse em colaborar com a aplicação seja implementando novas tecnologias a ela
+ou sugerindo tais implementações, sinta-se a vontade para entrar em contato comigo! 
+
 # Agradecimentos
+
+Agradeço a toda comunidade que dedica tanto de seu tempo, esforço e talentos para a 
+implementações das tecnologias maravilhosas que integram este projeto, por terem disponibilzado
+tantos recursos de maneira gratuita.
+
+Um agradecimento especial também a todos os que contribuíram para que o programa
+Oracle Next Education fosse possível! O programa tem me proporcionado conquistas
+significativas com relação ao meu progresso como desenvolvedor. 
+
+# LiterAlura - challenge Alura
+
+Aplicação elaborada em participação para o projeto ONE (Oracle Next Education)
+com a Alura, fase de especialização em backend com Java e Spring Boot
+___
+
+## Sobre o projeto
+Este projeto é uma ferramenta de busca de livros na API [Guntedex](https://gutendex.com/) e armazena os resultados das buscas em um banco de
+dados de acordo com a modelagem dos dados especificados pela aplicação e fornecidos pela API.
+
+A aplicação permite que os usuários:
+
+- Realizem buscas de novos livros através do providos pela [Guntedex](https://gutendex.com/);
+
+- Com base nos livros procurados, o banco de dados é alimentado,
+  e mais opções de persistência de dados se tornam possíveis, como:
+    - Apresentar os livros salvos no banco de dados;
+    - Listar os autores salvos no banco de dados;
+    - Selecionar uma quantidade mínima de downloads para apresentar livros do banco de dados;
+    - Listar os autores vivos em determinado ano.
+
+___
+## Tecnologias utilizadas
+
+- Java, versão 17
+- Spring Boot, versão 3.4.0
+- Jackson, versão 2.18.0
+- PostgreSQL, versão 17.0 (Banco de dados)
+- Gutendex.com API
+
+___
+
+## Como inicializar em seu dispositivo
+
+Para Utilizar o Literalura em seu próprio device,
+siga os seguintes passos:
+1. faça o download da aplicação usando o comando _Git clone_
+   através do terminal na pasta onde melhor preferir em seu
+   computador usando este o link https://github.com/NazarethDev/literalura.git
+   (pertencente ao projeto no Github).
+2. Abra o arquivo na IDE de sua preferência com suporte a Java em sua versão 17;
+3. **Edite as variáveis de ambiente da aplicação para as suas próprias.**
+   Elas se encontram no arquivo _literalura/src/main/resources/application.properties_;
+   nas linhas 3 e 4, e devem corresponder ao usuário e senha do banco de dados PostgreSQL respectivamente;
+4. Tenha em mente que na linha 2, a porta em que estiver utilizando o PostreSQL
+   (neste arquivo definida como "localhost:5432") e o nome do banco de dados, o qual precisa ser criando
+   manualmente por você no PostreSQL (neste código definido como "literalura") precisam ser os mesmo que existem
+   em sem computador, bem como as demais variáveis de ambiente. Tenha ciência de que os passos 3 e 4 indicados são essenciais para
+   o funcionamento e inicialização da aplicação em seu dispositivo, uma vez que dizem respeito a
+   conexão do banco de dados com a aplicação;
+5. Execute a aplicação.
+
+> # Agradecimentos
+
+Muito obrigado a todas as comunidades de desenvolvedores e pessoas
+que disponibilizaram tanto de seu tempo, talento e tecnologias desenvolvidas
+para a elaboração desse projeto.
+
+Assim como a eles, agradeço a todos que colaboraram de alguma maneira para que o programa
+Oracle Next Education (ONE) fosse possível, está sendo uma oportunidade preciosa e crucial para meu início e crescimento
+na tecnologia e desenvolvimento de sistema.
+
+
+> # Contato do desenvolvedor
+- email: lorran.nazareth@gmail.com
+- LinkedIn: https://www.linkedin.com/in/lorrannazareth/
 
