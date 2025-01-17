@@ -24,7 +24,7 @@ Dentre as funcionalidades podemos indicar:
 Para o cadastro de novos usuários no sistema, é necessário que seja informado um nome de usuário, e-mail e uma senha. Será necessário para de efetuar login o nome de usuário e senha do usuário.
 
 A requisição para a API é `http://localhost:8080/user/cadastrar`, e deve conter levar o Json:
-```
+```json lines
 {
 	"nome" : "usuario2",
 	"email" : "usuario@gmail.com",
@@ -484,8 +484,6 @@ Por configuração do sistema, os tokens gerados no login tem duração padrão 
 - Mostrar repostas por usuário `http://localhost:8080/user/IDUSUARIO/respostas` e
 - Mostrar tópicos por usuário, `http://localhost:8080/user/IDUSUARIO/topicos`.
 
-___
-
 
 # Tecnologias usadas
 
@@ -525,4 +523,6 @@ Esse projeto utiliza as seguintes tecnologias:
             </tr>
         </tbody>
     </table>
+
+# Agradecimentos
 
