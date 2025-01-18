@@ -40,7 +40,8 @@ public class TopicoController {
 
 
     @GetMapping
-    public ResponseEntity<Page<TopicResponse>> showTopics(@PageableDefault(size = 3, sort = {"dataCriacao"}, direction = Sort.Direction.ASC)Pageable paginacao) {
+    public ResponseEntity<Page<TopicResponse>> showTopics(
+            @PageableDefault(size = 3, sort = {"dataCriacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         Page<TopicResponse> topicos = topicService.listarTopicos(paginacao);
         return ResponseEntity.ok(topicos);
     }

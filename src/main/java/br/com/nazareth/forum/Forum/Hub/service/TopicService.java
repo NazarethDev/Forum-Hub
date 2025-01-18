@@ -86,8 +86,8 @@ public Topico createNewTopic(DadosNewTopic newTopic, Usuario autor) {
                 topico.getDataCriacao(),
                 topico.getDataAtualicacao(),
                 topico.isAnswered(),
-                topico.getCurso().getNome(), // Retorna o nome do curso, por exemplo
-                topico.getAutor().getNome()  // Retorna o nome do autor, sem a senha
+                topico.getCurso().getNome(),
+                topico.getAutor().getNome()
         ));
     }
 
