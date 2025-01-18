@@ -12,7 +12,7 @@ Além disso, cada tópico pode ser respondido por outros usuários. A resposta p
 
 ___
 
-> # Funcionalidades
+# Funcionalidades
 
 Os endereços para as funcionalidades serão simulados se utilizando como exemplo o pré-fixo `http://localhost:8080/` para simular o endereço de um servidor.
 
@@ -133,7 +133,7 @@ Os atributos de um curso como o nome e a categoria podem ser atualizados a parti
 			"dataAtualicacao": null,
 			"answered": false,
 			"cursoNome": "Análise e Desenvolvimento de Sistemas",
-			"autorNome": "Nazareth"
+			"autorNome": "Usuer1"
 		},
 		{
 			"id": 3,
@@ -143,15 +143,15 @@ Os atributos de um curso como o nome e a categoria podem ser atualizados a parti
 			"dataAtualicacao": null,
 			"answered": false,
 			"cursoNome": "Engenharia de software",
-			"autorNome": "Nazareth"
+			"autorNome": "User5"
 		},
 		{
 			"id": 4,
 			"titulo": "Insomnia e Postman",
 			"mensagem": "Qual a diferença entre essas duas aplicações?",
 			"dataCriacao": "2025-01-15T18:40:35.368695",
-			"dataAtualicacao": null,
-			"answered": false,
+			"dataAtualicacao": "2025-01-18T18:40:35.368695",
+			"answered": true,
 			"cursoNome": "Engenharia de software",
 			"autorNome": "Nazareth"
 		}
@@ -195,7 +195,7 @@ Para se apresentar os dados de apenas um tópico, a requisição é `http://loca
 	"answered": true,
 	"cursoNome": "Engenharia de software",
 	"autorNome": "Nazareth",
-	"autorEmail": "nazareth@gmail.com"
+	"autorEmail": "123456789@gmail.com"
 }
 ```
 
@@ -211,8 +211,8 @@ A API é capaz de mostrar listas dos tópicos gerados por determinado autor, o q
 			"dataCriacao": "2025-01-14T18:57:17.086801",
 			"answered": false,
 			"cursoNome": "Análise e Desenvolvimento de Sistemas",
-			"autorNome": "Nazareth",
-			"autorEmail": "nazareth@gmail.com"
+			"autorNome": "User",
+			"autorEmail": "user@gmail.com"
 		},
 		{
 			"id": 3,
@@ -221,8 +221,8 @@ A API é capaz de mostrar listas dos tópicos gerados por determinado autor, o q
 			"dataCriacao": "2025-01-14T23:25:29.392555",
 			"answered": false,
 			"cursoNome": "Engenharia de software",
-			"autorNome": "Nazareth",
-			"autorEmail": "nazareth@gmail.com"
+			"autorNome": "User48",
+			"autorEmail": "user48@gmail.com"
 		},
 		{
 			"id": 4,
@@ -231,8 +231,8 @@ A API é capaz de mostrar listas dos tópicos gerados por determinado autor, o q
 			"dataCriacao": "2025-01-15T18:40:35.368695",
 			"answered": true,
 			"cursoNome": "Engenharia de software",
-			"autorNome": "Nazareth",
-			"autorEmail": "nazareth@gmail.com"
+			"autorNome": "User5",
+			"autorEmail": "user5@gmail.com"
 		}
 	],
 	"pageable": {
@@ -273,8 +273,8 @@ Você pode obter o registro de um único tópico informando o Id de um tópico p
 	"dataCriacao": "2025-01-15T18:40:35.368695",
 	"answered": true,
 	"cursoNome": "Engenharia de software",
-	"autorNome": "Nazareth",
-	"autorEmail": "nazareth@gmail.com"
+	"autorNome": "User",
+	"autorEmail": "user@gmail.com"
 }
 ```
 
@@ -290,8 +290,8 @@ As respostas de um determinado tópico podem ser devolvidas a partir da requisi�
 		},
 		{
 			"id": 5,
-			"mensagem": "Você pode usar o Postman online, já o insomnia não.",
-			"dataCriacao": "2025-01-15T18:41:35.26546"
+			"mensagem": "Caso deseje usar  Postman para testar aplicações localmente, também é necessário fazer o download dele em sua máquina.",
+			"dataCriacao": "2025-01-17T18:41:35.26546"
 		},
 		{
 			"id": 6,
@@ -463,7 +463,7 @@ Esta requisição por sua vez, deve retornar apenas os cursos ativos que constam
 Para excluir um usuário e dados relacionados a ele do sistema, a requisição a se usar é `http://localhost:8080/user/IDUSUARIO`. Ao fazer isso, não será mais possível que o usuário recupere sua conta.
 
 ### Excluir curso
-Os cursos podem ser excluídos no sistema através da requisição `http://localhost:8080/cursos/IDCURSO`. Vale ressaltar que esse curso será apenas inativado, uma vez que o sistema utilizou o conceito de soft delete, para que assim tópicos que utilizaram o curso como referência no sistema não sofram os efeitos da exclusão do curso. 
+Os cursos podem ser excluídos no sistema através da requisição `http://localhost:8080/cursos/IDCURSO`. Vale ressaltar que esse curso será apenas inativado, uma vez que o sistema utiliza do conceito de soft delete, para que assim tópicos que utilizaram o curso como referência no sistema não sofram os efeitos da exclusão do curso. 
 
 A alteração visível nos tópicos, será a de que os tópicos apresentarão os cursos como ‘deletado’. Isso evita que os tópicos e suas respostas sofram as consequências dessa ação e seguirão registrados no banco de dados.
 
@@ -487,7 +487,7 @@ Por configuração do sistema, os tokens gerados no login tem duração padrão 
 - Mostrar tópicos por usuário, `http://localhost:8080/user/IDUSUARIO/topicos`.
 
 
-> # Tecnologias usadas
+ # Tecnologias usadas
 
 Esse projeto utiliza as seguintes tecnologias:
 
@@ -530,9 +530,9 @@ Esse projeto utiliza as seguintes tecnologias:
 
 # Novas implementações
 
-O projeto ainda possui o potencial para novas implementações e rotas para se utilizar!
-Caso tenha o interesse em colaborar com a aplicação seja implementando novas tecnologias a ela
-ou sugerindo tais implementações, sinta-se a vontade para entrar em contato comigo! 
+O projeto ainda possui o potencial para novas implementações e rotas para se utilizar! Caso tenha o interesse, sinta-se
+a vontade para entrar em contato tanto para contribuir com códigos ou até mesmo sugestões de mais funcionalidades!
+
 
 # Agradecimentos
 
@@ -544,70 +544,9 @@ Um agradecimento especial também a todos os que contribuíram para que o progra
 Oracle Next Education fosse possível! O programa tem me proporcionado conquistas
 significativas com relação ao meu progresso como desenvolvedor. 
 
-# LiterAlura - challenge Alura
 
-Aplicação elaborada em participação para o projeto ONE (Oracle Next Education)
-com a Alura, fase de especialização em backend com Java e Spring Boot
-___
+# Contato do desenvolvedor
 
-## Sobre o projeto
-Este projeto é uma ferramenta de busca de livros na API [Guntedex](https://gutendex.com/) e armazena os resultados das buscas em um banco de
-dados de acordo com a modelagem dos dados especificados pela aplicação e fornecidos pela API.
+Email: lorran.nazareth@gmail.com
 
-A aplicação permite que os usuários:
-
-- Realizem buscas de novos livros através do providos pela [Guntedex](https://gutendex.com/);
-
-- Com base nos livros procurados, o banco de dados é alimentado,
-  e mais opções de persistência de dados se tornam possíveis, como:
-    - Apresentar os livros salvos no banco de dados;
-    - Listar os autores salvos no banco de dados;
-    - Selecionar uma quantidade mínima de downloads para apresentar livros do banco de dados;
-    - Listar os autores vivos em determinado ano.
-
-___
-## Tecnologias utilizadas
-
-- Java, versão 17
-- Spring Boot, versão 3.4.0
-- Jackson, versão 2.18.0
-- PostgreSQL, versão 17.0 (Banco de dados)
-- Gutendex.com API
-
-___
-
-## Como inicializar em seu dispositivo
-
-Para Utilizar o Literalura em seu próprio device,
-siga os seguintes passos:
-1. faça o download da aplicação usando o comando _Git clone_
-   através do terminal na pasta onde melhor preferir em seu
-   computador usando este o link https://github.com/NazarethDev/literalura.git
-   (pertencente ao projeto no Github).
-2. Abra o arquivo na IDE de sua preferência com suporte a Java em sua versão 17;
-3. **Edite as variáveis de ambiente da aplicação para as suas próprias.**
-   Elas se encontram no arquivo _literalura/src/main/resources/application.properties_;
-   nas linhas 3 e 4, e devem corresponder ao usuário e senha do banco de dados PostgreSQL respectivamente;
-4. Tenha em mente que na linha 2, a porta em que estiver utilizando o PostreSQL
-   (neste arquivo definida como "localhost:5432") e o nome do banco de dados, o qual precisa ser criando
-   manualmente por você no PostreSQL (neste código definido como "literalura") precisam ser os mesmo que existem
-   em sem computador, bem como as demais variáveis de ambiente. Tenha ciência de que os passos 3 e 4 indicados são essenciais para
-   o funcionamento e inicialização da aplicação em seu dispositivo, uma vez que dizem respeito a
-   conexão do banco de dados com a aplicação;
-5. Execute a aplicação.
-
-> # Agradecimentos
-
-Muito obrigado a todas as comunidades de desenvolvedores e pessoas
-que disponibilizaram tanto de seu tempo, talento e tecnologias desenvolvidas
-para a elaboração desse projeto.
-
-Assim como a eles, agradeço a todos que colaboraram de alguma maneira para que o programa
-Oracle Next Education (ONE) fosse possível, está sendo uma oportunidade preciosa e crucial para meu início e crescimento
-na tecnologia e desenvolvimento de sistema.
-
-
-> # Contato do desenvolvedor
-- email: lorran.nazareth@gmail.com
-- LinkedIn: https://www.linkedin.com/in/lorrannazareth/
-
+LinkedIn: 

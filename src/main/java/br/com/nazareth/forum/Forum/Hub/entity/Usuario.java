@@ -115,6 +115,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public String toString() {
-        return  nome;
+        return  "nome: " + nome
+                + "email: " + email;
     }
 }
